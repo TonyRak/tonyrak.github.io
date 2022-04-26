@@ -1,2 +1,0 @@
-# tonyrak.github.io
-CV
