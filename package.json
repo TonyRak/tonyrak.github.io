@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+      "del": "^3.0.0",
+      "gulp": "^3.9.1",
+      "gulp-clean-css": "^3.10.0",
+      "gulp-concat": "^2.6.1",
+      "gulp-font": "^1.0.4",
+      "gulp-minify": "^3.1.0",
+      "gulp-rev": "^8.1.1"
+    }
+  }
+  
