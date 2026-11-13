@@ -6,6 +6,10 @@
     var canvas = document.querySelector('.hero-cloud');
     if (!canvas || !canvas.getContext) return;
 
+    // Sans la feuille de style (fichier en cache périmé, chargement raté), le canvas
+    // n'a pas de taille imposée : on n'anime pas plutôt que de risquer une boucle d'agrandissement.
+    if (getComputedStyle(canvas).position !== 'absolute') return;
+
     var ctx = canvas.getContext('2d');
     var hero = canvas.parentElement;
     var root = document.documentElement;
@@ -177,8 +181,11 @@
 
     function resize() {
         dpr = Math.min(window.devicePixelRatio || 1, 2);
-        W = Math.max(1, Math.round(canvas.clientWidth * dpr));
-        H = Math.max(1, Math.round(canvas.clientHeight * dpr));
+        var rect = canvas.getBoundingClientRect();
+        var w = Math.max(1, Math.min(4096, Math.round(rect.width * dpr)));
+        var h = Math.max(1, Math.min(4096, Math.round(rect.height * dpr)));
+        if (w === W && h === H) return;
+        W = w; H = h;
         canvas.width = W;
         canvas.height = H;
     }
@@ -211,7 +218,7 @@
         var spread = morphing ? Math.sin(p * Math.PI) : 0;
         var target = morphing ? to : from;
 
-        var size = Math.min(W, H) * 0.36;
+        var size = Math.min(W, H) * (W > H ? 0.36 : 0.44);
         var cx = W * (W > H ? 0.57 : 0.5), cy = H * 0.5;
         var ay = rotY + tiltY, cosY = Math.cos(ay), sinY = Math.sin(ay);
         var cosX = Math.cos(tiltX), sinX = Math.sin(tiltX);
@@ -275,7 +282,7 @@
     resize();
 
     if ('ResizeObserver' in window) {
-        new ResizeObserver(function () { resize(); if (!running) draw(); }).observe(canvas);
+        new ResizeObserver(function () { resize(); if (!running) draw(); }).observe(hero);
     } else {
         window.addEventListener('resize', function () { resize(); if (!running) draw(); });
     }

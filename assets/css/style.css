@@ -192,6 +192,7 @@ a:hover { text-decoration-thickness: 2px; }
 .hero-name, .hero-role, .hero-lead { text-shadow: 0 0 18px var(--bg), 0 0 6px var(--bg); }
 .hero-cloud {
     position: absolute; top: 0; right: 0; z-index: 0;
+    max-height: 100%; overflow: hidden;
     width: min(56%, 860px); height: 100%;
     pointer-events: none;
 }
@@ -405,7 +406,7 @@ a:hover { text-decoration-thickness: 2px; }
 /* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {
-    .hero-cloud { width: 100%; opacity: .35; }
+    .hero-cloud { width: 100%; opacity: .6; }
     .about, .cols { grid-template-columns: 1fr; }
     .cols { gap: 48px; }
     .skills { grid-template-columns: 1fr; }
