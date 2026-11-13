@@ -181,6 +181,19 @@ a:hover { text-decoration-thickness: 2px; }
         linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 100% 32px,
         linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 32px 100%;
     border-bottom: 1px solid var(--border);
+    overflow: hidden;
+}
+
+/* Nuage de points 3D (assets/js/pointcloud.js) */
+:root { --cloud: #8b9bff; --cloud-hot: #ffe45e; }
+:root[data-theme="light"] { --cloud: #303f9f; --cloud-hot: #0f766e; }
+
+.hero > .wrap { position: relative; z-index: 1; }
+.hero-name, .hero-role, .hero-lead { text-shadow: 0 0 18px var(--bg), 0 0 6px var(--bg); }
+.hero-cloud {
+    position: absolute; top: 0; right: 0; z-index: 0;
+    width: min(56%, 860px); height: 100%;
+    pointer-events: none;
 }
 
 .prompt { color: var(--muted); font-size: 15px; margin-bottom: 18px; }
@@ -392,6 +405,7 @@ a:hover { text-decoration-thickness: 2px; }
 /* ---------- Responsive ---------- */
 
 @media (max-width: 860px) {
+    .hero-cloud { width: 100%; opacity: .35; }
     .about, .cols { grid-template-columns: 1fr; }
     .cols { gap: 48px; }
     .skills { grid-template-columns: 1fr; }
